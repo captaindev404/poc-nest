@@ -1,14 +1,20 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { BookingModule } from './booking/booking.module';
-import { DatabaseModule } from './database/database.module';
-import { PostModule } from './post/post.module';
-import { CommentModule } from './comment/comment.module';
+import { PrismaService } from './prisma/prisma.service';
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
+import { CrossCuttingModule } from './cross-cutting/cross-cutting.module';
 
 @Module({
-  imports: [BookingModule, DatabaseModule, PostModule, CommentModule],
+  imports: [
+    PrismaModule,
+    AuthModule,
+    UsersModule,
+    CrossCuttingModule,
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, PrismaService],
 })
 export class AppModule {}
